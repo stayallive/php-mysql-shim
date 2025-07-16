@@ -152,7 +152,7 @@ namespace {
             return mysql_connect($hostname, $username, $password, false, $flags);
         }
 
-        function mysql_close(mysqli $link = null)
+        function mysql_close(mysqli|null $link = null)
         {
             $isDefault = ($link === null);
 
@@ -190,7 +190,7 @@ namespace {
             return $return;
         }
 
-        function mysql_select_db($databaseName, mysqli $link = null)
+        function mysql_select_db($databaseName, mysqli|null $link = null)
         {
             $link = MySQL::getConnection($link);
 
@@ -200,12 +200,12 @@ namespace {
             ) !== false;
         }
 
-        function mysql_query($query, mysqli $link = null)
+        function mysql_query($query, mysqli|null $link = null)
         {
             return mysqli_query(MySQL::getConnection($link), $query);
         }
 
-        function mysql_unbuffered_query($query, mysqli $link = null)
+        function mysql_unbuffered_query($query, mysqli|null $link = null)
         {
             $link = MySQL::getConnection($link);
             if (mysqli_real_query($link, $query)) {
@@ -215,7 +215,7 @@ namespace {
             return false;
         }
 
-        function mysql_db_query($databaseName, $query, mysqli $link = null)
+        function mysql_db_query($databaseName, $query, mysqli|null $link = null)
         {
             if (mysql_select_db($databaseName, $link)) {
                 return mysql_query($query, $link);
@@ -223,12 +223,12 @@ namespace {
             return false;
         }
 
-        function mysql_list_dbs(mysqli $link = null)
+        function mysql_list_dbs(mysqli|null $link = null)
         {
             return mysql_query('SHOW DATABASES', $link);
         }
 
-        function mysql_list_tables($databaseName, mysqli $link = null)
+        function mysql_list_tables($databaseName, mysqli|null $link = null)
         {
             $link = MySQL::getConnection($link);
             $query = sprintf(
@@ -238,7 +238,7 @@ namespace {
             return mysql_query($query, $link);
         }
 
-        function mysql_list_fields($databaseName, $tableName, mysqli $link = null)
+        function mysql_list_fields($databaseName, $tableName, mysqli|null $link = null)
         {
             $link = MySQL::getConnection($link);
 
@@ -261,22 +261,22 @@ namespace {
             // @codeCoverageIgnoreEnd
         }
 
-        function mysql_list_processes(mysqli $link = null)
+        function mysql_list_processes(mysqli|null $link = null)
         {
             return mysql_query('SHOW PROCESSLIST', $link);
         }
 
-        function mysql_error(mysqli $link = null)
+        function mysql_error(mysqli|null $link = null)
         {
             return mysqli_error(MySQL::getConnection($link));
         }
 
-        function mysql_errno(mysqli $link = null)
+        function mysql_errno(mysqli|null $link = null)
         {
             return mysqli_errno(MySQL::getConnection($link));
         }
 
-        function mysql_affected_rows(mysqli $link = null)
+        function mysql_affected_rows(mysqli|null $link = null)
         {
             return mysqli_affected_rows(MySQL::getConnection($link));
         }
@@ -650,57 +650,57 @@ namespace {
             return mysql_real_escape_string($unescapedString);
         }
 
-        function mysql_real_escape_string($unescapedString, mysqli $link = null)
+        function mysql_real_escape_string($unescapedString, mysqli|null $link = null)
         {
             return mysqli_real_escape_string(MySQL::getConnection($link), $unescapedString);
         }
 
-        function mysql_stat(mysqli $link = null)
+        function mysql_stat(mysqli|null $link = null)
         {
             return mysqli_stat(MySQL::getConnection($link));
         }
 
-        function mysql_thread_id(mysqli $link = null)
+        function mysql_thread_id(mysqli|null $link = null)
         {
             return mysqli_thread_id(MySQL::getConnection($link));
         }
 
-        function mysql_client_encoding(mysqli $link = null)
+        function mysql_client_encoding(mysqli|null $link = null)
         {
             return mysqli_character_set_name(MySQL::getConnection($link));
         }
 
-        function mysql_ping(mysqli $link = null)
+        function mysql_ping(mysqli|null $link = null)
         {
             return mysqli_ping(MySQL::getConnection($link));
         }
 
-        function mysql_get_client_info(mysqli $link = null)
+        function mysql_get_client_info(mysqli|null $link = null)
         {
             return mysqli_get_client_info(MySQL::getConnection($link));
         }
 
-        function mysql_get_host_info(mysqli $link = null)
+        function mysql_get_host_info(mysqli|null $link = null)
         {
             return mysqli_get_host_info(MySQL::getConnection($link));
         }
 
-        function mysql_get_proto_info(mysqli $link = null)
+        function mysql_get_proto_info(mysqli|null $link = null)
         {
             return mysqli_get_proto_info(MySQL::getConnection($link));
         }
 
-        function mysql_get_server_info(mysqli $link = null)
+        function mysql_get_server_info(mysqli|null $link = null)
         {
             return mysqli_get_server_info(MySQL::getConnection($link));
         }
 
-        function mysql_info(mysqli $link = null)
+        function mysql_info(mysqli|null $link = null)
         {
             return mysqli_info(MySQL::getConnection($link));
         }
 
-        function mysql_set_charset($charset, mysqli $link = null)
+        function mysql_set_charset($charset, mysqli|null $link = null)
         {
             return mysqli_set_charset(MySQL::getConnection($link), $charset);
         }
